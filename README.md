@@ -2,4 +2,4 @@
 
 ![](./public/img.png)
 
-[live site]()
+[live site](https://rock-papers-game.netlify.app/)
