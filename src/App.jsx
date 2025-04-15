@@ -16,6 +16,10 @@ function App() {
   const [systemSelectedBtn, setSystemSelectedBtn] = useState(null);
   const [gameStatus, setGameStatus] = useState("loading...");
 
+
+  useEffect(() => {
+    localStorage.setItem("score", score);
+  }, [score]);
   const toggleModal = () => {
     setOpenModal(!openModal);
   };
@@ -31,6 +35,7 @@ function App() {
 
       if (item.id === systemChoice.id) {
         setGameStatus("Draw");
+        setScore(prev => prev);
       } else if (
         (item.id === 1 && systemChoice.id === 3) ||
         (item.id === 2 && systemChoice.id === 1) ||
@@ -47,10 +52,8 @@ function App() {
     }, 1000);
   };
 
-  useEffect(() => {
-    localStorage.setItem("score", score);
-  }, [score]);
 
+  
   const playAgain = () => {
     setIsSelected(false);
     setSelectedBtn(null);
