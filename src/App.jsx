@@ -1,15 +1,12 @@
-import { useState , useEffect} from "react";
+import { useState,useRef, useEffect } from "react";
 import Modal from "./components/Modal";
 import { items } from "./items";
 import GameItem from "./components/GameItem";
-// import { clsx } from "clsx";
 import Status from "./components/Status";
 
 function App() {
-  const [score, setScore] = useState(() => {
-    const saved = localStorage.getItem("score");
-    return saved ? parseInt(saved) : 12;
-  });
+  const [score, setScore] = useState(12);
+  const scoreRef = useRef(score);
   const [openModal, setOpenModal] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
@@ -18,11 +15,14 @@ function App() {
 
 
   useEffect(() => {
-    localStorage.setItem("score", score);
+    scoreRef.current = score;
   }, [score]);
   const toggleModal = () => {
     setOpenModal(!openModal);
   };
+
+
+
 
   const handleClick = (item) => {
     console.log("you clicked ", item.alt);
@@ -33,22 +33,27 @@ function App() {
       const systemChoice = items[randomIndex];
       setSystemSelectedBtn(systemChoice);
 
+  
       if (item.id === systemChoice.id) {
         setGameStatus("Draw");
-        setScore(prev => prev);
+        const updatedScore = scoreRef.current;
+        setScore(updatedScore);
       } else if (
         (item.id === 1 && systemChoice.id === 3) ||
         (item.id === 2 && systemChoice.id === 1) ||
         (item.id === 3 && systemChoice.id === 2)
       ) {
         setGameStatus("You Win!");
-        setScore(prev => prev + 1);
+        const updatedScore = scoreRef.current + 1;
+        setScore(updatedScore);
 
       } else {
         setGameStatus("You Lose!");
-        setScore(prev => prev - 1);
+        const updatedScore = scoreRef.current - 1;
+        setScore(updatedScore);
 
       }
+
     }, 1000);
   };
 
