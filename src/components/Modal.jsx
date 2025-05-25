@@ -8,22 +8,20 @@ const Modal = ({setOpenModal}) => {
                  bg-white md:bg-black/60  " >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white w-full h-full px-4 py-6 md:w-1/2 md:h-3/5 flex flex-col justify-between items-center rounded-lg"
+        className="bg-white w-full h-full px-4 py-6 md:w-1/2 md:h-3/5 flex flex-col justify-evenly md:justify-between items-center rounded-lg"
       >
         {/* RULES Text */}
-        <div className="flex items-center flex-col md:flex-row justify-between w-full"> 
+        <div className="flex items-center flex-col md:flex-row md:justify-between w-full"> 
         <p className="uppercase font-barlow font-bold text-lg text-bg-one self-center text-center">
           rules
         </p>
 
-          {/* Close Button */}
+          {/* Close Button desktop */}
           <button
           onClick={setOpenModal}
           className="hidden md:inline cursor-pointer"
         >
-
-
-          <img src="/icon-close.svg" alt="close icon" />
+        <img src="/icon-close.svg" alt="close icon" />
         </button>
 
         </div>
@@ -36,7 +34,7 @@ const Modal = ({setOpenModal}) => {
         {/* Close Button */}
         <button
           onClick={setOpenModal}
-          className="order-3 md:hidden mt-6 cursor-pointer"
+          className="order-3 md:hidden cursor-pointer"
         >
           <img src="/icon-close.svg" alt="close icon" />
         </button>
